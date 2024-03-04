@@ -45,7 +45,7 @@ const SignUp = () => {
       setError(error.message)
     }
 
-    console.log(data);
+    //console.log(data);
   };
 
   //console.log(formData);
