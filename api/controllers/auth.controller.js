@@ -60,7 +60,7 @@ export const google = async (req, res, next) => {
       const newUser = new User({
         username:
           req.body.name.split(' ').join('').toLowerCase() +
-          Math.random().toString(36).slice(-4),
+          Math.random().toString(10).slice(-5),
         email: req.body.email,
         password: hashedPassword,
         avatar: req.body.photo,
