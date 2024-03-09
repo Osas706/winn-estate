@@ -163,6 +163,28 @@ const Profile = () => {
       setShowListingsError(true);
     }
   };
+
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+
+      const data = await res.json();
+
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      };
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   
   //template....................
   return (
@@ -261,7 +283,6 @@ const Profile = () => {
       <p>{showListingsError ? 'Error showing listings' : ''}</p>
 
     {userListings && userListings.length > 0 && 
-
       <div className='flex flex-col gap-4'>
         <h1 className='text-center mt-7 text-2xl font-semibold'>
           Your Listings
