@@ -5,3 +5,9 @@
 body{
     background-color: rgb(241, 245, 241);
 }
+
+.effect{
+  &:hover {
+    transform: rotateZ(-1deg) scale(1.01);
+  }
+}
