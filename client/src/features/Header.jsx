@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { Building2, Search, Plus, Info, CircleChevronDown, LogOut } from "lucide-react";
+import { Building2, Search, Plus, Info, CircleChevronDown, LogOut, LogIn } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -65,16 +65,14 @@ const Header = () => {
             <li className="hidden sm:inline-flex items-center gap-1 text-sm text-slate-200 hover:underline">About <Info className="w-4 h-4" /></li>
           </Link>
 
-          <Link to='/create-listing'>
+          {currentUser &&  <Link to='/create-listing'>
             <li className="hidden sm:inline-flex items-center gap-1 text-sm text-slate-200 hover:underline">Create Listing <Plus className="w-4 h-4" /></li>
-          </Link>
+          </Link>}
 
           <Link to='/profile'>
-            {
-              currentUser ? (
-                <img className="rounded-full h-7 w-7 object-cover" src={currentUser.avatar} alt="profile" />
-              ) :
-                <li className="text-slate-200 hover:underline">Sign In</li>
+            {currentUser ? (
+              <img className="rounded-full h-7 w-7 object-cover" src={currentUser.avatar} alt="profile" />
+              ) : <li className="text-slate-200 flex items-center gap-1 text-sm font-bold hover:underline">Sign In <LogIn className="w-4 h-4" /></li>
             }
           </Link>
 
