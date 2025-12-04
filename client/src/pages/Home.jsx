@@ -4,31 +4,31 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
-import ListingCard from "../components/ListingCard";
+import ListingCard from "../features/ListingCard";
 
 
 const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-  
+
   SwiperCore.use([Navigation]);
   //console.log(saleListings, rentListings);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
-       try {
+      try {
         const res = await fetch('/api/listing/get?offer=true&limit=3');
         const data = await res.json();
         setOfferListings(data);
 
         fetchRentListings();
-       } catch (error) {
+      } catch (error) {
         console.log(error);
       };
     };
 
-    const fetchRentListings  = async () => {
+    const fetchRentListings = async () => {
       try {
         const res = await fetch('/api/listing/get?type=rent&limit=3');
         const data = await res.json();
@@ -106,7 +106,7 @@ const Home = () => {
               <Link className='text-sm text-blue-800 hover:underline' to={'/search?offer=true'}>Show more offers</Link>
             </div>
 
-            <div className='flex flex-wrap gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
               {offerListings.map((listing) => (
                 <ListingCard listing={listing} key={listing._id} />
               ))}
@@ -121,7 +121,7 @@ const Home = () => {
               <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=rent'}>Show more places for rent</Link>
             </div>
 
-            <div className='flex flex-wrap gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
               {rentListings.map((listing) => (
                 <ListingCard listing={listing} key={listing._id} />
               ))}
@@ -136,7 +136,7 @@ const Home = () => {
               <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=sale'}>Show more places for sale</Link>
             </div>
 
-            <div className='flex flex-wrap gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
               {saleListings.map((listing) => (
                 <ListingCard listing={listing} key={listing._id} />
               ))}

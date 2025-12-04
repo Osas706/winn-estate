@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
-import OAuth from "../components/OAuth";
+import OAuth from "../features/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const { loading, error} = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ const SignIn = () => {
       navigate("/");
     } catch (error) {
       dispatch(signInFailure(error.message))
-    } 
+    }
   };
 
   //console.log(formData);
