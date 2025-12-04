@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
 import OAuth from "../features/OAuth";
+import { LogIn } from "lucide-react";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -42,11 +47,9 @@ const SignIn = () => {
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      dispatch(signInFailure(error.message))
+      dispatch(signInFailure(error.message));
     }
   };
-
-  //console.log(formData);
 
   return (
     <div className="p-3 max-w-lg mx-auto">
@@ -56,7 +59,7 @@ const SignIn = () => {
         <input
           type="email"
           placeholder="email"
-          className="border p-3 rounded-lg"
+          className="border  px-3 py-2 rounded-lg"
           id="email"
           onChange={handleChange}
         />
@@ -64,29 +67,33 @@ const SignIn = () => {
         <input
           type="password"
           placeholder="password"
-          className="border p-3 rounded-lg"
+          className="border px-3 py-2 rounded-lg"
           id="password"
           onChange={handleChange}
         />
 
         <button
           disabled={loading}
-          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-slate-700 text-white py-2 rounded-lg flex items-center justify-center gap-1  hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? "Loading..." : "Sign In"}
+          {loading ? "Loading..." : "Sign In"} <LogIn className="w-5 h-5" />
         </button>
 
         <OAuth />
       </form>
 
-      <div className="flex gap-2 mt-5">
+      <div className="flex gap-1 mt-5 w-max mx-auto text-sm">
         <p>Dont have an account?</p>
         <Link to="/sign-up">
           <span className="text-blue-700">Sign up</span>
         </Link>
       </div>
 
-      {error && <p className="text-red-500 mt-5">{error}</p>}
+      {error && (
+        <div className="flex bg-red-100 justify-center mt-5 py-0.5 items-center">
+          <p className="text-red-500  text-xs font-bold">{error}</p>
+        </div>
+      )}
     </div>
   );
 };

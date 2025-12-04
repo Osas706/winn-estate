@@ -33,6 +33,7 @@ const Home = () => {
       }
     };
 
+    // fetchRentListings func
     const fetchRentListings = async () => {
       try {
         const res = await fetch('/api/listing/get?type=rent&limit=3');
@@ -47,6 +48,7 @@ const Home = () => {
       }
     };
 
+    // fetchSaleListings func
     const fetchSaleListings = async () => {
       try {
         setLoading(true);

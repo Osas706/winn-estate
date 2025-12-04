@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../features/OAuth";
+import { LogIn } from "lucide-react";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -59,7 +60,7 @@ const SignUp = () => {
         <input
           type="text"
           placeholder="username"
-          className="border p-3 rounded-lg"
+          className="border px-3 py-2 rounded-lg"
           id="username"
           onChange={handleChange}
         />
@@ -67,7 +68,7 @@ const SignUp = () => {
         <input
           type="email"
           placeholder="email"
-          className="border p-3 rounded-lg"
+          className="border px-3 py-2 rounded-lg"
           id="email"
           onChange={handleChange}
         />
@@ -75,32 +76,34 @@ const SignUp = () => {
         <input
           type="password"
           placeholder="password"
-          className="border p-3 rounded-lg"
+          className="border px-3 py-2 rounded-lg"
           id="password"
           onChange={handleChange}
         />
 
         <button
           disabled={loading}
-          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-slate-700 text-white py-2 rounded-lg flex items-center justify-center gap-1 hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? "Loading..." : "Sign Up"}
+          {loading ? "Loading..." : "Sign Up"} <LogIn className="w-5 h-5" />
         </button>
 
         <OAuth />
       </form>
 
-      <div className="flex gap-2 mt-5">
+      <div className="flex gap-1 mt-5 w-max mx-auto text-sm">
         <p>Have an account?</p>
         <Link to="/sign-in">
           <span className="text-blue-700">sign in</span>
         </Link>
       </div>
 
-      {
-        error && <p className="text-red-500 mt-5">{error}</p>
-      }
-
+     
+      {error && (
+        <div className="flex bg-red-100 justify-center mt-5 py-0.5 items-center">
+          <p className="text-red-500  text-xs font-bold">{error}</p>
+        </div>
+      )}
     </div>
   );
 };
